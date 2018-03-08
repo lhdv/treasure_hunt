@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang=en>
+<head>
+  <title>{{ .Title }}</title>
+  <meta charset=utf-8>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="assets/index.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
+      <h1 class="text-center">Treasure Bond Hunt</h1>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-5">
+        <ul class="nav nav-pills" id="bondTypeSelection" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="bondbuy-tab" data-toggle="pill" href="#buylIst" role="tab" aria-controls="bondBuy" aria-selected="true">Buy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="bondsell-tab" data-toggle="pill" href="#sellList" role="tab" aria-controls="bondSell" aria-selected="false">Sell</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="buylIst" role="tabpanel" aria-labelledby="bondbuy-tab">
+            <p></p>
+            <div class="table-responsive">
+              <table id="bondBuyList" class="table-sm table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Index</th>
+                    <th>Due Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="sellList" role="tabpanel" aria-labelledby="bondsell-tab">
+            <p></p>
+            <div class="table-responsive">
+              <table id="bondSellList" class="table-sm table-bordered table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Name</th>
+                    <th>Index</th>
+                    <th>Due Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>          
+        </div>
+      </div>
+      <div class="col-7">
+        <h3 id="bondSelected" class="text-center">&nbsp</h1>
+        <div class="table-responsive">
+          <table id="tblResult" class="table display table-sm table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Date Fetch</th>
+                <th>Rate</th>
+                <th>Mininum Price</th>
+                <th>Unit Price</th>
+                <th>Last Updated</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Date Fetch</th>
+                <th>Rate</th>
+                <th>Mininum Price</th>
+                <th>Unit Price</th>
+                <th>Last Updated</th>
+              </tr>
+            </tfoot>            
+          </table>
+        </div>        
+      </div>
+    </div>
+    <p></p>
+    <hr>
+    <div class="footer text-center">
+      <small>Developed by: <a href="http://www.github.com/lhdv" target="_new">lhdv</a> - Version: {{ .Version }}</small>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="assets/index.js"></script>
+</html>
