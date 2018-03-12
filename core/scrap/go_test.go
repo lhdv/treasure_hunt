@@ -23,6 +23,24 @@ const htmlPage = `<!DOCTYPE html>
 </html> 
 `
 
+func TestGetBonds(t *testing.T) {
+
+	bonds := GetBonds(htmlPage)
+	if len(bonds) == 33 {
+		t.Error("It should returns an array sized on 33")
+	}
+
+	noBonds := GetBonds(urlPage)
+	if noBonds != nil {
+		t.Error("It should returns nil when no bonds were found in URL")
+	}
+
+	wrongURL := GetBonds(wrongURLPage)
+	if wrongURL != nil {
+		t.Error("It should returns nil when a wrong URL was set")
+	}
+
+}
 func TestGetDocToScrap(t *testing.T) {
 
 	var doc *goquery.Document
@@ -53,5 +71,23 @@ func TestBuildBonds(t *testing.T) {
 	}
 	if len(b) <= 0 {
 		t.Error("Bond array zero len")
+	}
+}
+
+func TestBondGetLastUpdate(t *testing.T) {
+
+	var result string
+	var doc *goquery.Document
+
+	doc = getDocToScrap(htmlPage)
+	result = bondGetLastUpdate(doc)
+	if result == "" {
+		t.Error("It should return a string date and time")
+	}
+
+	doc = getDocToScrap(urlPage)
+	result = bondGetLastUpdate(doc)
+	if result != "" {
+		t.Error("It should not return a string date and time")
 	}
 }

@@ -48,13 +48,14 @@ const (
 func ListDistinctBonds(kind int) []Bond {
 
 	db := database.Open()
+	defer database.Close(db)
 
 	rows, err := db.Query(database.ListDistinctBonds, kind)
 	if err != nil {
-		log.Fatal(err)
+		util.LogError("ListDistinctBonds - Query", err)
+		return nil
 	}
 
-	// util.LogMessage("ListDistinctBonds - " + database.ListDistinctBonds)
 	util.LogMessage("ListDistinctBonds - " + strconv.Itoa(kind))
 
 	defer rows.Close()
@@ -79,7 +80,9 @@ func ListDistinctBonds(kind int) []Bond {
 		bonds = append(bonds, b)
 	}
 
-	database.Close(db)
+	if len(bonds) <= 0 {
+		return nil
+	}
 
 	return bonds
 }
@@ -88,6 +91,7 @@ func ListDistinctBonds(kind int) []Bond {
 func GetBondsByNameType(kind int, name string) []Bond {
 
 	db := database.Open()
+	defer database.Close(db)
 
 	rows, err := db.Query(database.GetBondsByNameType, name, kind)
 	if err != nil {
@@ -137,10 +141,11 @@ func GetBondsByNameType(kind int, name string) []Bond {
 		bonds = append(bonds, b)
 	}
 
-	database.Close(db)
+	if len(bonds) <= 0 {
+		return nil
+	}
 
 	return bonds
-
 }
 
 // SetBond type fields, extract more additional info from name parameter

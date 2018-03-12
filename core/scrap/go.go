@@ -55,6 +55,10 @@ func buildBonds(doc *goquery.Document) []core.Bond {
 		}
 	})
 
+	if len(bonds) <= 0 && lastUpdate == "" {
+		bonds = nil
+	}
+
 	return bonds
 
 }

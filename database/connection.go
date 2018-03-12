@@ -2,7 +2,8 @@ package database
 
 import (
 	"database/sql"
-	"log"
+
+	"github.com/lhdv/treasure_hunt/util"
 
 	_ "github.com/mattn/go-sqlite3" // SQLite3 Driver
 )
@@ -12,7 +13,7 @@ func Open() *sql.DB {
 
 	db, err := sql.Open("sqlite3", DBFile)
 	if err != nil {
-		log.Fatal(err)
+		util.LogError("Open Connection", err)
 	}
 
 	return db
