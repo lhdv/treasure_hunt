@@ -8,6 +8,7 @@ Official Bond page: http://www.tesouro.fazenda.gov.br/tesouro-direto
 Support Libraries
 -----------------
 
+- SQLLite driver: https://github.com/mattn/go-sqlite3
 - datatables: https://datatables.net/
 - gorm: https://github.com/jinzhu/gorm
 - chart.js: http://www.chartjs.org/ 
