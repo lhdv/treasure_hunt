@@ -46,6 +46,7 @@ func FormatStringAmount(input string) string {
 	if r != " " {
 
 		r = strings.TrimPrefix(r, "R$")
+		r = strings.Trim(r, " ")
 
 		// Transfor numeric string only with matches the pattern 9.999,99
 		re = regexp.MustCompile(`\..*\,`)
@@ -64,6 +65,12 @@ func FormatStringAmount(input string) string {
 		re = regexp.MustCompile(`\,`)
 		if re.MatchString(input) {
 			r = strings.Replace(r, ",", ".", 1)
+			return r
+		}
+
+		re = regexp.MustCompile(`[a-zA-Z]`)
+		if re.MatchString(r) {
+			r = "0.00"
 			return r
 		}
 
