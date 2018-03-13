@@ -84,7 +84,11 @@ func FormatDate(d string) time.Time {
 		format = dateTimeFullFormat
 	}
 
-	t, _ := time.ParseInLocation(format, d, loc)
+	t, err := time.ParseInLocation(format, d, loc)
+	if err != nil {
+		LogError("util.FormatDate", err)
+		return time.Now()
+	}
 
 	return t
 }
@@ -103,7 +107,8 @@ func FormatDateTime(d string) time.Time {
 
 	t, err := time.ParseInLocation(format, d, loc)
 	if err != nil {
-		LogError("", err)
+		LogError("util.FormatDateTime", err)
+		return time.Now()
 	}
 
 	return t

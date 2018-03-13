@@ -157,9 +157,11 @@ func (b *Bond) SetBond(kind int, fetchDate, name, dueDate, rate, minPrice, unitP
 
 	bondInfo := util.ExtractBondInfo(b.Name)
 
-	b.Index = bondInfo[1]
-	if len(bondInfo) > 2 {
-		b.OldName = bondInfo[2]
+	if len(bondInfo) > 0 {
+		b.Index = bondInfo[1]
+		if len(bondInfo) > 2 {
+			b.OldName = bondInfo[2]
+		}
 	}
 
 	if dueDate != "" {
