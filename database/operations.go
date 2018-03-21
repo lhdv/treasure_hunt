@@ -1,9 +1,6 @@
 package database
 
 const (
-	// DBFile define a default database name(or file)
-	DBFile = "treasure_hunt.dat"
-
 	createBondsTable = `CREATE TABLE bonds (
                 id              INTEGER,
                 bond_fetch_datetime  TEXT,
