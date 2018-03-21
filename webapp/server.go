@@ -48,8 +48,8 @@ func rootPage(w http.ResponseWriter, r *http.Request) {
 	bSell := core.ListDistinctBonds(core.BondSell)
 	bBuy := core.ListDistinctBonds(core.BondBuy)
 
-	data.Version = "2.0"
-	data.Title = "CAÇA TESOURO " + data.Version
+	data.Version = "2.1"
+	data.Title = "TREASURE HUNT " + data.Version
 	data.BondsBuy = bBuy
 	data.BondsSell = bSell
 
