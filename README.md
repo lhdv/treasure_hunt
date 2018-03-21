@@ -1,6 +1,8 @@
 TREASURE HUNT
 =============
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/lhdv/treasure_hunt)](https://goreportcard.com/report/github.com/lhdv/treasure_hunt)
+
 Webapp build in Go to keep track of Brazilian T-Bonds(Tesouro Direto) rates and values.
 
 Official Bond page: http://www.tesouro.fazenda.gov.br/tesouro-direto
