@@ -47,8 +47,12 @@ const (
 // ListDistinctBonds gets a distinct list of bond names, its index and rate
 func ListDistinctBonds(kind int) []Bond {
 
-	db := database.Open()
+	db, err := database.Open("")
 	defer database.Close(db)
+	if err != nil {
+		util.LogError("ListDistinctBonds - database.Open", err)
+		return nil
+	}
 
 	rows, err := db.Query(database.ListDistinctBonds, kind)
 	if err != nil {
@@ -90,17 +94,19 @@ func ListDistinctBonds(kind int) []Bond {
 // GetBondsByNameType return an array of bonds for a given name and type(kind)
 func GetBondsByNameType(kind int, name string) []Bond {
 
-	db := database.Open()
+	db, err := database.Open("")
 	defer database.Close(db)
+	if err != nil {
+		util.LogError("GetBondsByNameType - database.Open", err)
+		return nil
+	}
 
 	rows, err := db.Query(database.GetBondsByNameType, name, kind)
+	defer rows.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	defer rows.Close()
-
-	//util.LogMessage("GetBondsByNameType - " + database.GetBondsByNameType)
 	util.LogMessage("GetBondsByNameType - " + strconv.Itoa(kind) + " / " + name)
 
 	bonds := make([]Bond, 0)
@@ -194,7 +200,13 @@ func (b *Bond) Add() error {
 
 	var err error
 
-	db := database.Open()
+	db, err := database.Open("")
+	defer database.Close(db)
+	if err != nil {
+		util.LogError("Add - database.Open", err)
+		return nil
+	}
+
 	if checkForSameBondQuote(b) <= 0 {
 		_, err = db.Exec(database.InsertBondsTable,
 			b.FetchDate.String(),
@@ -208,7 +220,6 @@ func (b *Bond) Add() error {
 			b.UnitPrice,
 			b.LastUpdate.String())
 	}
-	database.Close(db)
 
 	return err
 }
@@ -236,17 +247,20 @@ func checkForSameBondQuote(b *Bond) int {
 
 	result := 0
 
-	db := database.Open()
+	db, err := database.Open("")
+	defer database.Close(db)
+	if err != nil {
+		util.LogError("Add - database.Open", err)
+		return result
+	}
 
-	err := db.QueryRow(database.CheckBondExist, b.LastUpdate.String(), b.Name, b.Kind).Scan(&result)
+	err = db.QueryRow(database.CheckBondExist, b.LastUpdate.String(), b.Name, b.Kind).Scan(&result)
 	switch {
 	case err == sql.ErrNoRows:
 		result = 0
 	case err != nil:
 		log.Fatal(err)
 	}
-
-	database.Close(db)
 
 	return result
 }

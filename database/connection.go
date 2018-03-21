@@ -18,15 +18,14 @@ func Open(dbConn string) (*sql.DB, error) {
 	var db *sql.DB
 	var err error
 
-	if len(dbConn) > 0 {
-		if path.Ext(dbConn) == ".db" {
-			db, err = sql.Open("sqlite3", dbConn)
-		} else {
-			//db, err = sql.Open("sqlite3", dbConn) // other DB
-		}
-
-	} else {
+	if len(dbConn) <= 0 {
 		dbConn = dbFile
+	}
+
+	if path.Ext(dbConn) == ".dat" {
+		db, err = sql.Open("sqlite3", dbConn)
+	} else {
+		//db, err = sql.Open("sqlite3", dbConn) // other DB
 	}
 
 	if err != nil {
