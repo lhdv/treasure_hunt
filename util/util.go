@@ -11,6 +11,7 @@ import (
 const dateFormat = "02/01/2006"
 const dateTimeFormat = "02/01/2006 15:04"
 const dateTimeFullFormat = "2006-01-02 15:04:05 -0700 -07"
+const dateTimeFullFormatDayLight = "2006-01-02 15:04:05 -0700 -0700"
 const dateLocale = "America/Sao_Paulo"
 
 // ExtractBondInfo receives the bond full name and extract its Index and Old Name
@@ -85,9 +86,15 @@ func FormatDate(d string) time.Time {
 	loc, _ := time.LoadLocation(dateLocale)
 
 	format := ""
-	if len(d) == 10 {
+	switch
+	{
+	case len(d) == 10:
 		format = dateFormat
-	} else {
+	case len(d) == 29:
+		format = dateTimeFullFormat
+	case len(d) == 31:
+		format = dateTimeFullFormatDayLight
+	default:
 		format = dateTimeFullFormat
 	}
 
